@@ -1,0 +1,35 @@
+version: "3.6"
+
+services:
+  drupal-instance:
+    image: drupal-instance:latest
+    build:
+      context: .
+      dockerfile: drupal.dockerfile
+    container_name: drupal-instance
+    ports:
+      - "8080:80"
+    depends_on:
+      - drupal-mysql
+    networks:
+      - drupal-network
+    volumes:
+      - ${PWD}/volumes/drupal-instance/modules:/var/www/html/modules
+      - ${PWD}/volumes/drupal-instance/profiles:/var/www/html/profiles
+      - ${PWD}/volumes/drupal-instance/themes:/var/www/html/themes
+      - ${PWD}/volumes/drupal-instance/sites:/var/www/html/sites
+      - ${PWD}/volumes/drupal-instance/configs/core.services.yml:/opt/drupal/web/core/core.services.yml
+      - ${PWD}/volumes/drupal-instance/configs/settings.php:/opt/drupal/web/sites/default/settings.php
+  drupal-mysql:
+    image: drupal-mysql:latest
+    build:
+      context: .
+      dockerfile: mysql.dockerfile
+    container_name: drupal-mysql
+    networks:
+      - drupal-network
+    volumes:
+      - ${PWD}/volumes/drupal-mysql/dump:/docker-entrypoint-initdb.d
+
+networks:
+  drupal-network:
