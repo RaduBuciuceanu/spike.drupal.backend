@@ -41,3 +41,12 @@ docker-compose down
 ```
 
 ## Credentials
+Here you can find all the necessary credentials.
+
+|Key|Value|
+|---|---|
+|Drupal username|`admin`|
+|Drupal password|`admin`|
+|Database username|`user`|
+|Database password|`password`|
+|Database root password|`password`|
