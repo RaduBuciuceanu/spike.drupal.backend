@@ -14,12 +14,12 @@ services:
     networks:
       - drupal-network
     volumes:
-      - ${PWD}/volumes/drupal-instance/modules:/var/www/html/modules
-      - ${PWD}/volumes/drupal-instance/profiles:/var/www/html/profiles
-      - ${PWD}/volumes/drupal-instance/themes:/var/www/html/themes
-      - ${PWD}/volumes/drupal-instance/sites:/var/www/html/sites
-      - ${PWD}/volumes/drupal-instance/configs/core.services.yml:/opt/drupal/web/core/core.services.yml
-      - ${PWD}/volumes/drupal-instance/configs/settings.php:/opt/drupal/web/sites/default/settings.php
+      - "./volumes/drupal-instance/modules:/var/www/html/modules"
+      - "./volumes/drupal-instance/profiles:/var/www/html/profiles"
+      - "./volumes/drupal-instance/themes:/var/www/html/themes"
+      - "./volumes/drupal-instance/sites:/var/www/html/sites"
+      - "./volumes/drupal-instance/configs/core.services.yml:/opt/drupal/web/core/core.services.yml"
+      - "./volumes/drupal-instance/configs/settings.php:/opt/drupal/web/sites/default/settings.php"
   drupal-mysql:
     image: drupal-mysql:latest
     build:
@@ -29,7 +29,7 @@ services:
     networks:
       - drupal-network
     volumes:
-      - ${PWD}/volumes/drupal-mysql/dump:/docker-entrypoint-initdb.d
+      - "./volumes/drupal-mysql/dump:/docker-entrypoint-initdb.d"
 
 networks:
   drupal-network:
